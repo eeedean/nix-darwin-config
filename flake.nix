@@ -1,5 +1,5 @@
 {
-  description = "Example Darwin system flake";
+  description = "My Darwin System Flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -7,19 +7,104 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ pkgs.vim
+        [ 
+          pkgs.vim
+          pkgs.ripgrep
+          pkgs.wget
+          pkgs.nix-direnv
+          pkgs.hexyl
+          pkgs.htop
+          pkgs.asciidoctor
+          pkgs.zsh-powerlevel10k
+          pkgs.awscli
+          pkgs.imagemagick
+          pkgs.bash-completion
+          pkgs.k9s
+          pkgs.qemu
+          pkgs.kompose
+          pkgs.kubectl
+          pkgs.kubeseal
+          pkgs.kubelogin
+          pkgs.cocoapods
+          pkgs.ripmime
+          pkgs.colima
+          pkgs.rtmpdump
+          pkgs.curl
+          pkgs.diff-so-fancy
+          pkgs.s5cmd
+          pkgs.screen
+          pkgs.docker
+          pkgs.dog
+          pkgs.speedtest-cli
+          pkgs.ssh-copy-id
+          pkgs.mysql-client
+          pkgs.ffmpeg
+          pkgs.inetutils
+          pkgs.nmap
+          pkgs.tldr
+          pkgs.tree
+          pkgs.nyancat
+          pkgs.velero
+          pkgs.watch
+          pkgs.git
+          pkgs.xmlstarlet
+          pkgs.gnupg
+          pkgs.hexedit
+          pkgs.pkg-config
         ];
+        
       homebrew = {
         enable = true;
-        casks = [
-          "firefox"
+        brews = [
+          "rename"
         ];
+        casks = [
+          "aerial" "datweatherdoe" "google-chrome" "monitorcontrol" "shotcut" "utm" 
+          "anaconda" "dbvisualizer" "handbrake" "mysqlworkbench" "signal" "visual-studio-code" 
+          "android-platform-tools" "discord" "iterm2" "notion" "skype" "visualvm" 
+          "anki" "docker" "jdownloader" "obs" "slack" "vlc" 
+          "anydesk" "dozer" "jetbrains-toolbox" "obs-ndi" "sourcetree" "whatsapp" 
+          "audacity" "elgato-camera-hub" "keka" "paintbrush" "spotify" "wireshark" 
+          "background-music" "elgato-control-center" "libndi" "parallels" "stats" "wkhtmltopdf" 
+          "balenaetcher" "elgato-stream-deck" "macfuse" "portfolioperformance" "steam" "xbar" 
+          "cameracontroller" "epoccam" "macpass" "powershell" "telegram" "yubico-yubikey-manager" 
+          "coconutbattery" "firefox" "mactex" "rectangle" "timeular" 
+          "cryptomator" "gimp" "minecraft" "sensiblesidebuttons" "tunnelblick" 
+          "cyberduck" "glance" "miniconda" "setapp" "ultimaker-cura"
+        ];
+      };
+
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      users.users.edean.home = "/Users/edean";
+      home-manager.users.edean = { pkgs, ... }: {
+        home.stateVersion = "23.05";
+
+        programs.tmux = { # my tmux configuration, for example
+          enable = true;
+          keyMode = "vi";
+          clock24 = true;
+          historyLimit = 10000;
+          plugins = with pkgs.tmuxPlugins; [
+            vim-tmux-navigator
+            gruvbox
+          ];
+          extraConfig = ''
+            new-session -s main
+            bind-key -n C-a send-prefix
+          '';
+        };
+        programs.direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+          enableZshIntegration = true;
+        };
       };
 
       # Auto upgrade nix package and the daemon service.
@@ -29,6 +114,11 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
       nix.settings.trusted-users = ["edean"];
+      nix.gc = {
+         automatic = true;
+         interval.Day = 7; #Hours, minutes
+         options = "--delete-older-than 7d";
+      };
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;  # default shell on catalina
@@ -63,7 +153,10 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."MacBook-Pro-von-Dean-2" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [ 
+        home-manager.darwinModules.home-manager
+        configuration
+      ];
     };
 
     # Expose the package set, including overlays, for convenience.
