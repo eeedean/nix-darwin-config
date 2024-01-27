@@ -10,54 +10,55 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     configuration = { pkgs, ... }: {
+      nixpkgs.config.allowUnfree = true;
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-          pkgs.vim
-          pkgs.ripgrep
-          pkgs.wget
-          pkgs.nix-direnv
-          pkgs.hexyl
-          pkgs.htop
-          pkgs.asciidoctor
-          pkgs.zsh-powerlevel10k
-          pkgs.awscli
-          pkgs.imagemagick
-          pkgs.bash-completion
-          pkgs.k9s
-          pkgs.qemu
-          pkgs.kompose
-          pkgs.kubectl
-          pkgs.kubeseal
-          pkgs.kubelogin
-          pkgs.cocoapods
-          pkgs.ripmime
-          pkgs.colima
-          pkgs.rtmpdump
-          pkgs.curl
-          pkgs.diff-so-fancy
-          pkgs.s5cmd
-          pkgs.screen
-          pkgs.docker
-          pkgs.dog
-          pkgs.speedtest-cli
-          pkgs.ssh-copy-id
-          pkgs.mysql-client
-          pkgs.ffmpeg
-          pkgs.inetutils
-          pkgs.nmap
-          pkgs.tldr
-          pkgs.tree
-          pkgs.nyancat
-          pkgs.velero
-          pkgs.watch
-          pkgs.git
-          pkgs.xmlstarlet
-          pkgs.gnupg
-          pkgs.hexedit
-          pkgs.pkg-config
-        ];
+      environment.systemPackages = with pkgs; [ 
+        asciidoctor
+        awscli
+        bash-completion
+        cocoapods
+        colima
+        curl
+        diff-so-fancy
+        docker
+        dog
+        ffmpeg
+        git
+        gnupg
+        hexedit
+        hexyl
+        htop
+        imagemagick
+        inetutils
+        k9s
+        kompose
+        kubectl
+        kubelogin
+        kubeseal
+        mysql-client
+        nix-direnv
+        nmap
+        nil
+        nyancat
+        pkg-config
+        qemu
+        ripgrep
+        ripmime
+        rtmpdump
+        s5cmd
+        screen
+        speedtest-cli
+        ssh-copy-id
+        tldr
+        tree
+        velero
+        vim
+        watch
+        wget
+        xmlstarlet
+        zsh-powerlevel10k
+      ];
         
       homebrew = {
         enable = true;
@@ -65,18 +66,7 @@
           "rename"
         ];
         casks = [
-          "aerial" "datweatherdoe" "google-chrome" "monitorcontrol" "shotcut" "utm" 
-          "anaconda" "dbvisualizer" "handbrake" "mysqlworkbench" "signal" "visual-studio-code" 
-          "android-platform-tools" "discord" "iterm2" "notion" "skype" "visualvm" 
-          "anki" "docker" "jdownloader" "obs" "slack" "vlc" 
-          "anydesk" "dozer" "jetbrains-toolbox" "obs-ndi" "sourcetree" "whatsapp" 
-          "audacity" "elgato-camera-hub" "keka" "paintbrush" "spotify" "wireshark" 
-          "background-music" "elgato-control-center" "libndi" "parallels" "stats" "wkhtmltopdf" 
-          "balenaetcher" "elgato-stream-deck" "macfuse" "portfolioperformance" "steam" "xbar" 
-          "cameracontroller" "epoccam" "macpass" "powershell" "telegram" "yubico-yubikey-manager" 
-          "coconutbattery" "firefox" "mactex" "rectangle" "timeular" 
-          "cryptomator" "gimp" "minecraft" "sensiblesidebuttons" "tunnelblick" 
-          "cyberduck" "glance" "miniconda" "setapp" "ultimaker-cura"
+          "anaconda" "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "docker" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager"
         ];
       };
 
@@ -86,29 +76,36 @@
       home-manager.users.edean = { pkgs, ... }: {
         home.stateVersion = "23.05";
 
-        programs.tmux = { # my tmux configuration, for example
-          enable = true;
-          keyMode = "vi";
-          clock24 = true;
-          historyLimit = 10000;
-          plugins = with pkgs.tmuxPlugins; [
-            vim-tmux-navigator
-            gruvbox
-          ];
-          extraConfig = ''
-            new-session -s main
-            bind-key -n C-a send-prefix
-          '';
-        };
         programs.direnv = {
           enable = true;
           nix-direnv.enable = true;
           enableZshIntegration = true;
         };
+        programs.vscode = {
+          enable = true;
+          extensions = with pkgs.vscode-extensions; [
+            arrterian.nix-env-selector
+            bbenoist.nix
+            dotjoshjohnson.xml
+            dracula-theme.theme-dracula
+            jnoortheen.nix-ide
+            mkhl.direnv
+            ms-azuretools.vscode-docker
+            redhat.java
+            scala-lang.scala
+            vscjava.vscode-gradle
+            vscjava.vscode-java-debug
+            vscjava.vscode-java-dependency
+            vscjava.vscode-java-test
+            vscjava.vscode-maven
+            yzhang.markdown-all-in-one
+          ];
+        };
       };
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
+      services.nix-daemon.logFile = "/var/log/nix-daemon.log";
       # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.
@@ -122,7 +119,6 @@
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;  # default shell on catalina
-      # programs.fish.enable = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -145,8 +141,24 @@
       system.defaults = {
         finder.AppleShowAllExtensions = true;
         screencapture.location = "~/Pictures/Screenshots";
-        finder.FXPreferredViewStyle = "clmv";
+        finder.FXPreferredViewStyle = "Nlsv";
+        ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+        NSGlobalDomain.AppleInterfaceStyle = "Dark";
+        NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
+        # enable "tap to click"
+        NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
+        dock.autohide = false;
+        dock.magnification = true;
+        dock.largesize = 16;
+        # Start Screen Saver in top left corner
+        dock.wvous-tl-corner = 5;
+        # Show breadcrumbs
+        finder.ShowPathbar = true;
+        loginwindow.GuestEnabled = false;
+        screensaver.askForPassword = true;
+        screensaver.askForPasswordDelay = 5;
       };
+      
     };
   in
   {
