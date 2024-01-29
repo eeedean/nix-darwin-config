@@ -14,14 +14,16 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [ 
+        audacity
         asciidoctor
         awscli
         bash-completion
+        bat
         cocoapods
         colima
         curl
         diff-so-fancy
-        docker
+        docker-client
         dog
         ffmpeg
         git
@@ -31,6 +33,7 @@
         htop
         imagemagick
         inetutils
+        jq
         k9s
         kompose
         kubectl
@@ -63,10 +66,10 @@
       homebrew = {
         enable = true;
         brews = [
-          "rename"
+          "rename" "helm" "exa"
         ];
         casks = [
-          "anaconda" "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "docker" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager"
+          "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager"
         ];
       };
 
@@ -74,7 +77,30 @@
       home-manager.useUserPackages = true;
       users.users.edean.home = "/Users/edean";
       home-manager.users.edean = { pkgs, ... }: {
-        home.stateVersion = "23.05";
+        home.stateVersion = "23.11";
+        programs.zsh = {
+          enable = true;
+          enableAutosuggestions = true;
+          oh-my-zsh = {
+              enable = true;
+              plugins = [
+                "git"
+                "macos"
+                "docker"
+                "docker-compose"
+              ];
+            };
+          initExtra = ''
+            source ~/.profile
+          '';
+          plugins = [
+            {
+              name = "powerlevel10k";
+              src = pkgs.zsh-powerlevel10k;
+              file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+            }
+          ];
+        };
 
         programs.direnv = {
           enable = true;
