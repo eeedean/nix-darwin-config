@@ -1,12 +1,9 @@
-{ lib, inputs, nixpkgs, home-manager, nix-darwin, user, ...}:
+{ lib, inputs, nixpkgs, home-manager, nix-darwin, user, hostname, ...}:
 
 let
   # Darwin Architecture
   # System Options: [ "aarch64-darwin" "x86_64-darwin" ]
   system = "aarch64-darwin";
-
-  # Hostname
-  hostname = "MacBook-Pro-von-Dean-2";
 in
 {
   # MacBook Pro

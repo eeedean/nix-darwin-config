@@ -26,13 +26,15 @@
   outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, ... }:
     let
       user = "edean";
+      hostname = "MacBook-Pro-von-Dean-2";
     in
     {
       darwinConfigurations = (
         import ./darwin {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user nix-darwin;
+          inherit inputs nixpkgs home-manager user hostname nix-darwin;
         }
       );
+      darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
     };
 }
