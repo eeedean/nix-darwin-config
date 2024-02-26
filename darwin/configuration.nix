@@ -1,6 +1,8 @@
 { config, pkgs, user, hostname, ... }:
 
 {
+  # Create /etc/zshrc that loads the nix-darwin environment.
+  programs.zsh.enable = true;  # default shell on catalina
 
   # Imports
   imports = [(import ../modules/fonts.nix)];
@@ -91,10 +93,6 @@
   # Nix Package Manager
   # https://mynixos.com/nix-darwin/option/nix
   nix = {
-
-    # Nix - Package
-    # https://mynixos.com/nix-darwin/option/nix.package
-    package = pkgs.nix;
 
     # Nix - GC (Garbage Collection)
     # https://mynixos.com/nix-darwin/option/nix.gc
