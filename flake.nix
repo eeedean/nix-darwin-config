@@ -19,7 +19,7 @@
   outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, ... }:
     let
       user = "edean";
-      hostname = "MacBook-Pro-von-Dean-2";
+      hostname = "MBP-von-Dean";
     in
     {
       darwinConfigurations = (

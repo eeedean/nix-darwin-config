@@ -1,4 +1,4 @@
-{ config, pkgs, user, lib, ... }:
+{ config, pkgs, user, lib, hostname, ... }:
 
 {
   # Home Manager
@@ -27,6 +27,10 @@
     };
 
     activation = {
+      setHostName = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        /usr/sbin/scutil --set HostName "${hostname}.local"
+      '';
+
       # This should be removed once
       # https://github.com/nix-community/home-manager/issues/1341 is closed.
       aliasApplications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

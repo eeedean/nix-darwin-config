@@ -18,7 +18,6 @@
   # Networking
   networking = {
     computerName = "${hostname}";
-    hostName = "${hostname}";
   };
 
   # Environment Configuration
@@ -26,6 +25,7 @@
 
     # Installed Nix Packages
     systemPackages = with pkgs; [
+      ansible
       audacity
       asciidoctor
       awscli
@@ -192,7 +192,7 @@
     };
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.extraSpecialArgs = { inherit user; };
+    home-manager.extraSpecialArgs = { inherit user hostname; };
     home-manager.users.${user} = {
       imports = [(import ./home.nix)] ++
                 [(import ../modules/home-manager/direnv.nix)] ++
