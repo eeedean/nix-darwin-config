@@ -51,6 +51,7 @@
       kubectl
       kubelogin
       kubeseal
+      lame
       mysql-client
       nix-direnv
       nmap
