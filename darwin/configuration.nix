@@ -128,6 +128,11 @@
         "nix-command"
         "flakes"
       ];
+
+      system-features = [
+          "nixos-test"
+          "apple-virt"
+        ];
     };
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
@@ -138,6 +143,10 @@
         ephemeral = true;
         maxJobs = 4;
         config = {
+          nix.settings.sandbox = false;
+          networking = {
+            nameservers = [ "8.8.8.8" "1.1.1.1" ];
+          };
           virtualisation = {
             darwin-builder = {
               diskSize = 40 * 1024;
@@ -147,10 +156,6 @@
           };
         };
       };
-      settings.system-features = [
-          "nixos-test"
-          "apple-virt"
-        ];
   };
 
   # Allow proprietary software
