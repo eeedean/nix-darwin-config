@@ -63,6 +63,7 @@
       nmap
       nil
       nyancat
+      openjdk17
       pkg-config
       qemu
       ripgrep
