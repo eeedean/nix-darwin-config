@@ -221,7 +221,7 @@
   };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit user hostname; };
+  home-manager.extraSpecialArgs = { inherit user hostname;age=config.age; };
   home-manager.users.${user} = {
     imports = [(import ./home.nix)] ++
               [(import ../modules/home-manager/direnv.nix)] ++

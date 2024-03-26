@@ -1,4 +1,4 @@
-{ config, pkgs, user, lib, hostname, ... }:
+{ config, pkgs, user, lib, hostname, age, ... }:
 
 {
   # Home Manager
@@ -32,6 +32,9 @@
       '';
       ownSecrets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         /usr/bin/sudo chown ${user} /run/agenix/*
+        /usr/bin/sudo cp ${age.secrets.id_rsa.path} /Users/${user}/.ssh/id_rsa
+        /usr/bin/sudo cp ${age.secrets.id_rsa_pub.path} /Users/${user}/.ssh/id_rsa.pub
+        /usr/bin/sudo chown ${user} /Users/${user}/.ssh/id_rsa.pub /Users/${user}/.ssh/id_rsa
       '';
 
       # This should be removed once
