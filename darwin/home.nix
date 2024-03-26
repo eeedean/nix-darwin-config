@@ -30,6 +30,9 @@
       setHostName = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         /usr/sbin/scutil --set HostName "${hostname}.local"
       '';
+      ownSecrets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        /usr/bin/sudo chown ${user} /run/agenix/*
+      '';
 
       # This should be removed once
       # https://github.com/nix-community/home-manager/issues/1341 is closed.

@@ -13,10 +13,11 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
   # Flake outputs
-  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, ... }:
     let
       user = "edean";
       hostname = "MBP-von-Dean";
@@ -25,7 +26,7 @@
       darwinConfigurations = (
         import ./darwin {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user hostname nix-darwin;
+          inherit inputs nixpkgs home-manager user hostname nix-darwin agenix;
         }
       );
       darwinPackages = self.darwinConfigurations.${hostname}.pkgs;

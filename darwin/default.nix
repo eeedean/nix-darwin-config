@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, nix-darwin, user, hostname, ...}:
+{ lib, inputs, nixpkgs, home-manager, nix-darwin, user, hostname, agenix, ...}:
 
 let
   # Darwin Architecture
@@ -9,13 +9,14 @@ in
   # MacBook Pro
   "${hostname}" = nix-darwin.lib.darwinSystem {
     inherit system;
-    specialArgs = { inherit inputs user hostname; };
+    specialArgs = { inherit inputs user hostname agenix; };
     modules = [
       # MacBook Pro Configuration
       ./configuration.nix
 
       # Home Manager
       home-manager.darwinModules.home-manager
+      agenix.nixosModules.default
     ];
   };
 }

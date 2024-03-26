@@ -1,16 +1,21 @@
-{ config, pkgs, user, hostname, ... }:
+{ config, pkgs, user, hostname, agenix, ... }:
 
 {
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
 
   # Imports
-  imports = [(import ../modules/fonts.nix)];
+  imports = [
+    (import ../modules/fonts.nix)
+    (import ../modules/age.nix)
+  ];
 
   # MacOS User & Shell
   users.users."${user}" = {
     home = "/Users/${user}";
   };
+
+  users.groups."keys".members = [ user ];
 
   # Time Zone (TZ)
   time.timeZone = "Europe/Berlin";
@@ -25,6 +30,7 @@
 
     # Installed Nix Packages
     systemPackages = with pkgs; [
+      agenix.packages.${system}.default
       ansible
       audacity
       asciidoctor
@@ -153,13 +159,14 @@
               memorySize = 8 * 1024;
             };
             cores = 6;
+            msize = 128 * 1024;
           };
         };
       };
   };
 
-  # Allow proprietary software
   nixpkgs = {
+    # Allow proprietary software
     config.allowUnfree = true;
   };
 
@@ -167,7 +174,6 @@
   # https://mynixos.com/nix-darwin/option/security.pam.enableSudoTouchIdAuth
   security.pam.enableSudoTouchIdAuth = true;
 
-  # DawinOS System Settings
   system = {
     configurationRevision = config.rev or config.dirtyRev or null;
     defaults = {
@@ -178,14 +184,14 @@
       askForPasswordDelay = 5;
       };
       screencapture.location = "~/Pictures/Screenshots";
-      NSGlobalDomain = {                  # Global macOS system settings
+      NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
         # enable "tap to click"
         "com.apple.mouse.tapBehavior" = 1;
       };
-      dock = {                            # Dock settings
+      dock = {
         autohide = false;
         orientation = "left";
         magnification = true;
@@ -193,7 +199,7 @@
         # Start Screen Saver in top left corner
         wvous-tl-corner = 5;
       };
-      finder = {                          # Finder settings
+      finder = {
         ShowPathbar = true;               # Show breadcrumbs
       };
     };
@@ -202,25 +208,25 @@
     stateVersion = 4;
   };
 
-  homebrew = {                            # Declare Homebrew using Nix-Darwin
-      enable = true;
-      onActivation.upgrade = true;                    # Auto update packages
-      brews = [
-        "rename" "helm" "exa"
-      ];
-      casks = [
-        "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager" "zed"
-      ];
-    };
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.extraSpecialArgs = { inherit user hostname; };
-    home-manager.users.${user} = {
-      imports = [(import ./home.nix)] ++
-                [(import ../modules/home-manager/direnv.nix)] ++
-                [(import ../modules/home-manager/git.nix)] ++
-                [(import ../modules/home-manager/vscode.nix)] ++
-                [(import ../modules/home-manager/nvim.nix)] ++
-                [(import ../modules/home-manager/zsh.nix)];
-    };
+  homebrew = {
+    enable = true;
+    onActivation.upgrade = true;
+    brews = [
+      "rename" "helm" "exa"
+    ];
+    casks = [
+      "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager" "zed"
+    ];
+  };
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit user hostname; };
+  home-manager.users.${user} = {
+    imports = [(import ./home.nix)] ++
+              [(import ../modules/home-manager/direnv.nix)] ++
+              [(import ../modules/home-manager/git.nix)] ++
+              [(import ../modules/home-manager/vscode.nix)] ++
+              [(import ../modules/home-manager/nvim.nix)] ++
+              [(import ../modules/home-manager/zsh.nix)];
+  };
 }
