@@ -1,9 +1,16 @@
 { config, lib, pkgs, ... }:
 
 {
+  #file.".p10k.zsh".source = ./.p10k.zsh;
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
+    dotDir = ".config/zsh";
+    history = {
+      size = 99999;
+      save = 99999;
+    };
     oh-my-zsh = {
         enable = true;
         plugins = [
@@ -14,7 +21,9 @@
         ];
       };
     initExtra = ''
-      source ~/.profile
+      source ~/.secure_profile
+      source ~/.config/zsh/p10k.zsh
+      function saytofile(){ say -v $1 $2 -o .tmp.aiff && lame -m m .tmp.aiff $3.mp3 && rm .tmp.aiff; };
     '';
     plugins = [
       {

@@ -12,10 +12,15 @@
     # Home Directory
     homeDirectory = "/Users/${user}";
 
+    file."Library/Application\ Support/xbar/plugins/bahninfo.5s.sh".source = ./xbar/bahninfo.5s.sh;
+    file."Library/Application\ Support/xbar/plugins/CalendarLite.1m.sh".source = ./xbar/CalendarLite.1m.sh;
+    file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
+
     # Home Packages
     packages = with pkgs; [
       awscli2
       coreutils
+      eza
       nushell
       wget
       jq
@@ -24,6 +29,16 @@
     # Session Variables
     sessionVariables = {
       EDITOR = "vim";
+      DOCKER_HOST = "unix://\${HOME}/.colima/default/docker.sock";
+      TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock";
+    };
+
+    shellAliases = {
+      "vsc" = "code";
+      "formatjson" = "python -m json.tool";
+      "brewupdate" = "brew update && brew upgrade && brew upgrade --cask && brew cleanup";
+      "listening-apps" = "lsof -nP -i | grep LISTEN";
+      "ls" = "eza";
     };
 
     activation = {

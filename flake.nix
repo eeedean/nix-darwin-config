@@ -18,8 +18,8 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, ... }:
     let
-      user = inputs.user;
-      hostname = inputs.hostname;
+      user = "edean";
+      hostname = "MBP-von-Dean";
     in
     {
       darwinConfigurations = (
