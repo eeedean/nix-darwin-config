@@ -48,7 +48,7 @@
       #     work (presumably because the individual apps are symlinked in that directory, not
       #     aliased). So this makes "Home Manager Apps" a normal directory and then aliases each
       #     application into there directly from its location in the nix store.
-      $DRY_RUN_CMD mkdir "$app_folder"
+      $DRY_RUN_CMD mkdir -p "$app_folder"
       find "$newGenPath/home-path/Applications/" -maxdepth 1 -mindepth 1 | while read app;
       do
         appname=$(find "$app" -maxdepth 0 -printf "%f\n")

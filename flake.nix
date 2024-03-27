@@ -16,11 +16,10 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  # Flake outputs
   outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, ... }:
     let
-      user = "edean";
-      hostname = "MBP-von-Dean";
+      user = inputs.user;
+      hostname = inputs.hostname;
     in
     {
       darwinConfigurations = (
