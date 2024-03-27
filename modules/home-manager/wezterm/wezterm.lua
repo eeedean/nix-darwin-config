@@ -15,7 +15,7 @@ config.scrollback_lines = 3000
 config.default_workspace = "home"
 config.initial_cols = 175
 config.initial_rows = 50
-config.font_size = 18
+config.font_size = 14
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 config.use_ime = false
@@ -61,6 +61,14 @@ config.keys = {
   -- Lastly, workspace
   { key = "w",          mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
 
+
+  -- Make Option-Right equivalent to Alt-f; forward-word
+  { key = "RightArrow", mods = "OPT",    action = wezterm.action { SendString = "\x1bf" } },
+  -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
+  { key = "LeftArrow",  mods = "OPT",    action = wezterm.action { SendString = "\x1bb" } },
+  { key = "+",          mods = "CMD",    action = wezterm.action.IncreaseFontSize },
+  { key = "-",          mods = "CMD",    action = wezterm.action.DecreaseFontSize },
+
 }
 -- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
 for i = 1, 9 do
@@ -70,16 +78,6 @@ for i = 1, 9 do
     action = act.ActivateTab(i - 1)
   })
 end
-
-table.insert(config.keys,
-  -- Make Option-Right equivalent to Alt-f; forward-word
-  { key = "RightArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bf" } }
-)
-
-table.insert(config.keys,
-  -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-  { key = "LeftArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bb" } }
-)
 
 config.key_tables = {
   resize_pane = {

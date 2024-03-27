@@ -15,6 +15,7 @@
     file."Library/Application\ Support/xbar/plugins/bahninfo.5s.sh".source = ./xbar/bahninfo.5s.sh;
     file."Library/Application\ Support/xbar/plugins/CalendarLite.1m.sh".source = ./xbar/CalendarLite.1m.sh;
     file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
+    file.".config/zed/settings.json".source = ../modules/zed/settings.json;
 
     # Home Packages
     packages = with pkgs; [
