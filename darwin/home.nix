@@ -1,4 +1,4 @@
-{ config, pkgs, user, lib, hostname, age, ... }:
+{ config, pkgs, user, lib, hostname, age, nixneovim, ... }:
 
 {
   # Home Manager

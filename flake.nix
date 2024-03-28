@@ -13,10 +13,11 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixneovim.url = "github:nixneovim/nixneovim";
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, nixneovim, ... }:
     let
       user = "edean";
       hostname = "MBP-von-Dean";

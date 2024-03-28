@@ -6,17 +6,26 @@ let
   system = "aarch64-darwin";
 in
 {
+
   # MacBook Pro
   "${hostname}" = nix-darwin.lib.darwinSystem {
     inherit system;
-    specialArgs = { inherit inputs user hostname agenix; };
+    specialArgs = { inherit inputs user hostname agenix; nixneovim = inputs.nixneovim; };
     modules = [
+      {
+        nixpkgs = {
+          overlays = [
+              inputs.nixneovim.overlays.default
+          ];
+        };
+      }
       # MacBook Pro Configuration
       ./configuration.nix
 
+      agenix.nixosModules.default
+
       # Home Manager
       home-manager.darwinModules.home-manager
-      agenix.nixosModules.default
     ];
   };
 }
