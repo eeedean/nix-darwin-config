@@ -40,11 +40,15 @@
       "brewupdate" = "brew update && brew upgrade && brew upgrade --cask && brew cleanup";
       "listening-apps" = "lsof -nP -i | grep LISTEN";
       "ls" = "eza";
+      "vi" = "nvim";
+      "vim" = "nvim";
     };
 
     activation = {
       setHostName = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        /usr/sbin/scutil --set HostName "${hostname}.local"
+        if [ "$(/bin/hostname)" != "${hostname}.local" ]; then
+          /usr/sbin/scutil --set HostName "${hostname}.local"
+        fi
       '';
       ownSecrets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         /usr/bin/sudo chown ${user} /run/agenix/*
