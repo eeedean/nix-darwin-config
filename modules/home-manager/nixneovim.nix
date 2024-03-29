@@ -25,6 +25,11 @@
         indent = true;
       };
 
+      nvim-cmp = {
+        enable = true;
+        snippet.luasnip.enable = true;
+      };
+
       lspconfig = {
         enable = true;
         servers = {
