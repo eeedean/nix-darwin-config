@@ -28,11 +28,11 @@ config.inactive_pane_hsb = {
 }
 
 -- Keys
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
   -- { key = '8', mods = 'ALT', action = "SendString", arg = "{" },
   -- Send C-a when pressing C-a twice
-  { key = "a",          mods = "LEADER", action = act.SendKey { key = "a", mods = "CTRL" } },
+  { key = "w",          mods = "LEADER", action = act.SendKey { key = "w", mods = "CTRL" } },
   { key = "c",          mods = "LEADER", action = act.ActivateCopyMode },
 
   -- Pane keybindings
