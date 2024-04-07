@@ -15,9 +15,14 @@
     };
     nixneovim.url = "github:nixneovim/nixneovim";
     agenix.url = "github:ryantm/agenix";
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, nixneovim, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, nixneovim, nixos-wsl, ... }:
     let
       user = "edean";
       hostname = "MBP-von-Dean";
@@ -30,5 +35,12 @@
         }
       );
       darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
+
+      nixosConfigurations = (
+        import ./wsl/default.nix {
+          inherit (nixpkgs) lib;
+          inherit  inputs nixpkgs home-manager agenix nixos-wsl;
+        }
+      );
     };
 }

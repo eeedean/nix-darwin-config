@@ -1,4 +1,4 @@
-{ config, pkgs, user, hostname, agenix, nixneovim, ... }:
+{ config, pkgs, system, user, hostname, agenix, nixneovim, ... }:
 
 {
   # Create /etc/zshrc that loads the nix-darwin environment.

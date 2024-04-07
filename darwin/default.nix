@@ -10,7 +10,7 @@ in
   # MacBook Pro
   "${hostname}" = nix-darwin.lib.darwinSystem {
     inherit system;
-    specialArgs = { inherit inputs user hostname agenix; nixneovim = inputs.nixneovim; };
+    specialArgs = { inherit inputs system user hostname agenix; nixneovim = inputs.nixneovim; };
     modules = [
       {
         nixpkgs = {
