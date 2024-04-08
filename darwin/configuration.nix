@@ -37,6 +37,7 @@
       awscli
       bash-completion
       bat
+      bun
       cocoapods
       colima
       curl
@@ -223,12 +224,14 @@
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit user hostname nixneovim; age=config.age; };
   home-manager.users.${user} = {
-    imports = [(import ./home.nix)] ++
-              [(import ../modules/home-manager/direnv.nix)] ++
-              [(import ../modules/home-manager/git.nix)] ++
-              [(import ../modules/home-manager/vscode.nix)] ++
-              [(import ../modules/home-manager/nixneovim.nix)] ++
-              [(import ../modules/home-manager/zsh/zsh.nix)] ++
-              [(import ../modules/home-manager/wezterm/wezterm.nix)];
+    imports = [
+      ./home.nix
+      ../modules/home-manager/direnv.nix
+      ../modules/home-manager/git.nix
+      ../modules/home-manager/vscode.nix
+      ../modules/home-manager/nixneovim.nix
+      ../modules/home-manager/zsh/zsh.nix
+      ../modules/home-manager/wezterm/wezterm.nix
+    ];
   };
 }

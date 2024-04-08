@@ -32,6 +32,7 @@
       EDITOR = "vim";
       DOCKER_HOST = "unix://\${HOME}/.colima/default/docker.sock";
       TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock";
+      PATH ="$PATH:$HOME/Applications";
     };
 
     shellAliases = {
