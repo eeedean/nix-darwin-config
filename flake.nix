@@ -36,10 +36,16 @@
       );
       darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
 
-      nixosConfigurations = (
+      nixosConfigurations.wsl = (
         import ./wsl/default.nix {
           inherit (nixpkgs) lib;
-          inherit  inputs nixpkgs home-manager agenix nixos-wsl;
+          inherit inputs nixpkgs home-manager agenix nixos-wsl;
+        }
+      );
+      nixosConfigurations.karotte = (
+        import ./karotte/default.nix {
+	  inherit (nixpkgs) lib;
+	  inherit inputs nixpkgs home-manager agenix;
         }
       );
     };

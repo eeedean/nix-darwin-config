@@ -1,9 +1,9 @@
-{ lib, inputs, nixpkgs, home-manager, agenix, nixos-wsl, ...}:
+{ lib, inputs, nixpkgs, home-manager, agenix, ...}:
 
 let
   system = "x86_64-linux";
-  hostname = "wsl-nixos";
-  user = "edean";
+  hostname = "karotte";
+  user = "dean";
 in
 nixpkgs.lib.nixosSystem {
   inherit system;
@@ -19,7 +19,6 @@ nixpkgs.lib.nixosSystem {
 
     ./configuration.nix
 
-    nixos-wsl.nixosModules.wsl
     agenix.nixosModules.default
     home-manager.nixosModules.home-manager
   ];
