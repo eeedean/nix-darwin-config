@@ -122,7 +122,8 @@
     settings = {
       # Nix - Settings - Optimise Store
       # https://mynixos.com/nix-darwin/option/nix.settings.auto-optimise-store
-      auto-optimise-store = true;
+      # disabled, because some buggy behaviour: https://github.com/NixOS/nix/issues/7273
+      auto-optimise-store = false;
 
       # Nix - Settings - Trusted Users
       # https://mynixos.com/nix-darwin/option/nix.settings.trusted-users
