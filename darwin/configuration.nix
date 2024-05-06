@@ -30,59 +30,8 @@
   environment = {
 
     # Installed Nix Packages
-    systemPackages = with pkgs; [
-      agenix.packages.${system}.default
-      ansible
-      audacity
-      asciidoctor
-      awscli
-      bash-completion
-      bat
-      bun
-      cocoapods
-      colima
-      curl
-      diff-so-fancy
-      docker-client
-      dog
-      ffmpeg
-      git
-      gnupg
-      hexedit
-      hexyl
-      htop
-      imagemagick
-      inetutils
-      jq
-      k9s
-      kompose
-      kubectl
-      kubelogin
-      kubeseal
-      lame
-      mysql-client
-      nix-direnv
-      nmap
-      nil
-      nyancat
-      openjdk17
-      pkg-config
-      qemu
-      ripgrep
-      ripmime
-      rtmpdump
-      s5cmd
-      screen
-      speedtest-cli
-      ssh-copy-id
-      tldr
-      tree
-      velero
-      watch
-      wget
-      xmlstarlet
-      zsh-powerlevel10k
-    ];
+    systemPackages = import ../common/system-packages.nix { inherit pkgs; } 
+    ++ [ agenix.packages.${system}.default ];
   };
 
   # System Services

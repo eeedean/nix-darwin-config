@@ -15,14 +15,7 @@
     file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
 
     # Home Packages
-    packages = with pkgs; [
-      awscli2
-      coreutils
-      eza
-      nushell
-      wget
-      jq
-    ];
+    packages = import ../common/home-packages.nix { inherit pkgs; };
 
     # Session Variables
     sessionVariables = {

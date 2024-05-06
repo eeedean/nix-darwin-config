@@ -40,11 +40,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOoOK2BxZdNrWgli6jnYOdlgl6o8rjk7N9FDFo3rfU3m dean.eckert@red-oak-consulting.com"
     ];
   };
-  environment.systemPackages = with pkgs; [
-    git vim
-    agenix.packages.${system}.default ansible asciidoctor awscli bash-completion bat curl diff-so-fancy dog ffmpeg git gnupg hexedit hexyl htop imagemagick inetutils jq k9s kompose kubectl kubelogin kubeseal lame mysql-client nix-direnv nmap nil nyancat pkg-config qemu ripgrep ripmime rtmpdump s5cmd screen speedtest-cli ssh-copy-id tldr tree velero watch wget xmlstarlet zsh-powerlevel10k
-  ];
 
+  environment.systemPackages = import ../common/system-packages.nix { inherit pkgs; } 
+  ++ [ agenix.packages.${system}.default ];
 
   system.stateVersion = "23.11";
 

@@ -18,14 +18,7 @@
     file.".config/zed/settings.json".source = ../modules/zed/settings.json;
 
     # Home Packages
-    packages = with pkgs; [
-      awscli2
-      coreutils
-      eza
-      nushell
-      wget
-      jq
-    ];
+    packages = import ../common/home-packages.nix { inherit pkgs; };
 
     # Session Variables
     sessionVariables = {
