@@ -8,6 +8,7 @@
   imports = [
     (import ../modules/fonts.nix)
     (import ../modules/age.nix)
+    (import ./homebrew)
   ];
 
   # MacOS User & Shell
@@ -211,16 +212,6 @@
     stateVersion = 4;
   };
 
-  homebrew = {
-    enable = true;
-    onActivation.upgrade = true;
-    brews = [
-      "rename" "helm"
-    ];
-    casks = [
-      "android-platform-tools" "anki" "anydesk" "audacity" "background-music" "balenaetcher" "cameracontroller" "coconutbattery" "cryptomator" "cyberduck" "datweatherdoe" "dbvisualizer" "discord" "dozer" "elgato-camera-hub" "elgato-control-center" "elgato-stream-deck" "epoccam" "firefox" "gimp" "glance" "google-chrome" "handbrake" "iterm2" "jdownloader" "jetbrains-toolbox" "keka" "libndi" "macfuse" "macpass" "mactex" "minecraft" "miniconda" "monitorcontrol" "mysqlworkbench" "notion" "obs" "obs-ndi" "paintbrush" "parallels" "portfolioperformance" "powershell" "rectangle" "sensiblesidebuttons" "setapp" "shotcut" "signal" "skype" "slack" "sourcetree" "spotify" "stats" "steam" "telegram" "timeular" "tunnelblick" "ultimaker-cura" "utm" "vlc" "visualvm" "whatsapp" "whisky" "wireshark" "wkhtmltopdf" "xbar" "yubico-yubikey-manager" "zed"
-    ];
-  };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit user hostname nixneovim; age=config.age; };
