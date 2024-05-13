@@ -25,6 +25,13 @@
       source ~/.config/zsh/p10k.zsh
       export PATH="$PATH:/opt/homebrew/bin";
       function saytofile(){ say -v $1 $2 -o .tmp.aiff && lame -m m .tmp.aiff $3.mp3 && rm .tmp.aiff; };
+      function padBinary() {
+        if [ -n "$2" ]; then
+          printf "%0*d\n" $2 $(echo "obase=2;$1" | bc);
+        else
+          echo "obase=2;$1" | bc;
+        fi
+      };
     '';
     plugins = [
       {
