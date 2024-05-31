@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Fonts
   # https://search.nixos.org/options?channel=unstable&show=fonts
   fonts = {
-
     # Font Directory
     # https://search.nixos.org/options?channel=unstable&show=fonts.fontDir
     fontDir.enable = true;

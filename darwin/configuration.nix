@@ -1,8 +1,15 @@
-{ config, pkgs, system, user, hostname, agenix, nixneovim, ... }:
-
 {
+  config,
+  pkgs,
+  system,
+  user,
+  hostname,
+  agenix,
+  nixneovim,
+  ...
+}: {
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
 
   # Imports
   imports = [
@@ -16,7 +23,7 @@
     home = "/Users/${user}";
   };
 
-  users.groups."keys".members = [ user ];
+  users.groups."keys".members = [user];
 
   # Time Zone (TZ)
   time.timeZone = "Europe/Berlin";
@@ -28,10 +35,10 @@
 
   # Environment Configuration
   environment = {
-
     # Installed Nix Packages
-    systemPackages = import ../common/system-packages.nix { inherit pkgs; } 
-    ++ [ agenix.packages.${system}.default ];
+    systemPackages =
+      import ../common/system-packages.nix {inherit pkgs;}
+      ++ [agenix.packages.${system}.default];
   };
 
   # System Services
@@ -52,11 +59,9 @@
   # Nix Package Manager
   # https://mynixos.com/nix-darwin/option/nix
   nix = {
-
     # Nix - GC (Garbage Collection)
     # https://mynixos.com/nix-darwin/option/nix.gc
     gc = {
-
       # Nix - GC - Automatic Garbage Collection
       # https://mynixos.com/nix-darwin/option/nix.gc.automatic
       automatic = true;
@@ -89,33 +94,33 @@
       ];
 
       system-features = [
-          "nixos-test"
-          "apple-virt"
-        ];
+        "nixos-test"
+        "apple-virt"
+      ];
     };
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
     # Enable building Linux binaries
     linux-builder = {
-        enable = true;
-        ephemeral = true;
-        maxJobs = 4;
-        config = {
-          nix.settings.sandbox = false;
-          networking = {
-            nameservers = [ "8.8.8.8" "1.1.1.1" ];
+      enable = true;
+      ephemeral = true;
+      maxJobs = 4;
+      config = {
+        nix.settings.sandbox = false;
+        networking = {
+          nameservers = ["8.8.8.8" "1.1.1.1"];
+        };
+        virtualisation = {
+          darwin-builder = {
+            diskSize = 40 * 1024;
+            memorySize = 8 * 1024;
           };
-          virtualisation = {
-            darwin-builder = {
-              diskSize = 40 * 1024;
-              memorySize = 8 * 1024;
-            };
-            cores = 6;
-            msize = 128 * 1024;
-          };
+          cores = 6;
+          msize = 128 * 1024;
         };
       };
+    };
   };
 
   nixpkgs = {
@@ -133,8 +138,8 @@
       ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
       loginwindow.GuestEnabled = false;
       screensaver = {
-      askForPassword = true;
-      askForPasswordDelay = 5;
+        askForPassword = true;
+        askForPasswordDelay = 5;
       };
       screencapture.location = "~/Pictures/Screenshots";
       NSGlobalDomain = {
@@ -153,7 +158,7 @@
         wvous-tl-corner = 5;
       };
       finder = {
-        ShowPathbar = true;               # Show breadcrumbs
+        ShowPathbar = true; # Show breadcrumbs
       };
     };
 
@@ -163,7 +168,10 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit user hostname nixneovim; age=config.age; };
+  home-manager.extraSpecialArgs = {
+    inherit user hostname nixneovim;
+    age = config.age;
+  };
   home-manager.users.${user} = {
     imports = [
       ./home.nix

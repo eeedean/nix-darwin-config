@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Direnv
   # https://mipmip.github.io/home-manager-option-search/?programs.direnv
   programs.direnv = {
-
     # Direnv - Enable
     # https://mipmip.github.io/home-manager-option-search/?programs.direnv.enable
     enable = true;

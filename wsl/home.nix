@@ -1,6 +1,14 @@
-{ config, inputs, pkgs, user, lib, hostname, age, nixneovim, ... }:
-
 {
+  config,
+  inputs,
+  pkgs,
+  user,
+  lib,
+  hostname,
+  age,
+  nixneovim,
+  ...
+}: {
   # Home Manager
   home = {
     # Home State Version
@@ -15,7 +23,7 @@
     file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
 
     # Home Packages
-    packages = import ../common/home-packages.nix { inherit pkgs; };
+    packages = import ../common/home-packages.nix {inherit pkgs;};
 
     # Session Variables
     sessionVariables = {
@@ -31,7 +39,7 @@
     };
 
     activation = {
-      ownSecrets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ownSecrets = lib.hm.dag.entryAfter ["writeBoundary"] ''
         $DRY_RUN_CMD /run/wrappers/bin/sudo chown -R ${user} /run/agenix/
         $DRY_RUN_CMD /run/wrappers/bin/sudo cp ${age.secrets.id_rsa.path} /home/${user}/.ssh/id_rsa
         $DRY_RUN_CMD /run/wrappers/bin/sudo cp ${age.secrets.id_rsa_pub.path} /home/${user}/.ssh/id_rsa.pub
@@ -42,7 +50,6 @@
 
   # Programs
   programs = {
-
     # Home Manager
     home-manager.enable = true;
   };

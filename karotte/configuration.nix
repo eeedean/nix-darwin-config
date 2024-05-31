@@ -1,15 +1,24 @@
-{ config, pkgs, inputs, system, user, hostname, agenix, nixneovim, ... }: {
-  
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  user,
+  hostname,
+  agenix,
+  nixneovim,
+  ...
+}: {
   imports = [
     (import ../modules/fonts.nix)
     (import ../modules/age.nix)
   ];
-  
+
   nixpkgs = {
     # Allow proprietary software
     config.allowUnfree = true;
   };
- 
+
   time.timeZone = "Europe/Berlin";
 
   networking.hostName = "${hostname}";
@@ -41,8 +50,53 @@
     ];
   };
   environment.systemPackages = with pkgs; [
-    git vim
-    agenix.packages.${system}.default ansible asciidoctor awscli bash-completion bat curl diff-so-fancy dog ffmpeg git gnupg hexedit hexyl htop imagemagick inetutils jq k9s kompose kubectl kubelogin kubeseal lame mysql-client nix-direnv nmap nil nyancat pkg-config qemu ripgrep ripmime rtmpdump s5cmd screen speedtest-cli ssh-copy-id tldr tree velero watch wget xmlstarlet zsh-powerlevel10k
+    git
+    vim
+    agenix.packages.${system}.default
+    ansible
+    asciidoctor
+    awscli
+    bash-completion
+    bat
+    curl
+    diff-so-fancy
+    dog
+    ffmpeg
+    git
+    gnupg
+    hexedit
+    hexyl
+    htop
+    imagemagick
+    inetutils
+    jq
+    k9s
+    kompose
+    kubectl
+    kubelogin
+    kubeseal
+    lame
+    mysql-client
+    nix-direnv
+    nmap
+    nil
+    nyancat
+    pkg-config
+    qemu
+    ripgrep
+    ripmime
+    rtmpdump
+    s5cmd
+    screen
+    speedtest-cli
+    ssh-copy-id
+    tldr
+    tree
+    velero
+    watch
+    wget
+    xmlstarlet
+    zsh-powerlevel10k
   ];
 
   system.stateVersion = "23.11";
@@ -55,7 +109,11 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit user hostname; age=config.age; nixneovim = inputs.nixneovim; };
+  home-manager.extraSpecialArgs = {
+    inherit user hostname;
+    age = config.age;
+    nixneovim = inputs.nixneovim;
+  };
   home-manager.users.${user} = {
     imports = [
       ./home.nix

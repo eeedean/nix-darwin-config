@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Visual Studio Code
   # https://mipmip.github.io/home-manager-option-search/?programs.vscode
   programs.vscode = {

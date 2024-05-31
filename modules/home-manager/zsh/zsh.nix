@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   #file.".p10k.zsh".source = ./.p10k.zsh;
 
   programs.zsh = {
@@ -12,14 +15,14 @@
       save = 99999;
     };
     oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "macos"
-          "docker"
-          "docker-compose"
-        ];
-      };
+      enable = true;
+      plugins = [
+        "git"
+        "macos"
+        "docker"
+        "docker-compose"
+      ];
+    };
     initExtra = ''
       source ~/.secure_profile
       source ~/.config/zsh/p10k.zsh

@@ -1,6 +1,10 @@
-{ config, lib, pkgs, nixneovim, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  nixneovim,
+  ...
+}: {
   imports = [
     nixneovim.nixosModules.default
   ];
@@ -10,10 +14,10 @@
     globals.mapleader = " ";
 
     options = {
-      number = true;         # Show line numbers
+      number = true; # Show line numbers
       wrap = false;
 
-      shiftwidth = 2;        # Tab width should be 2
+      shiftwidth = 2; # Tab width should be 2
     };
 
     plugins = {
@@ -42,24 +46,23 @@
           eslint.enable = true;
         };
       };
-
     };
     mappings = {
       normal = {
-        "<leader>e" = { action = "'<cmd>:Explore<CR>'"; };
-        "<leader>q" = { action = "'<cmd>:q<CR>'"; };
-        "<leader>h" = { action = "'<cmd>:split<CR>'"; };
-        "<leader>v" = { action = "'<cmd>:vsplit<CR>'"; };
+        "<leader>e" = {action = "'<cmd>:Explore<CR>'";};
+        "<leader>q" = {action = "'<cmd>:q<CR>'";};
+        "<leader>h" = {action = "'<cmd>:split<CR>'";};
+        "<leader>v" = {action = "'<cmd>:vsplit<CR>'";};
 
-        "<leader>ff" = { action = "require('telescope.builtin').find_files"; };
-        "<leader>fg" = { action = "require('telescope.builtin').live_grep"; };
-        "<leader>fb" = { action = "require('telescope.builtin').buffers"; };
-        "<leader>fh" = { action = "require('telescope.builtin').help_tags"; };
+        "<leader>ff" = {action = "require('telescope.builtin').find_files";};
+        "<leader>fg" = {action = "require('telescope.builtin').live_grep";};
+        "<leader>fb" = {action = "require('telescope.builtin').buffers";};
+        "<leader>fh" = {action = "require('telescope.builtin').help_tags";};
 
-        "<leader><Right>" = { action = "'<cmd>:vertical resize +5<CR>'"; };
-        "<leader><Left>" = { action = "'<cmd>:vertical resize -5<CR>'"; };
-        "<leader><Up>" = { action = "'<cmd>:resize +5<CR>'"; };
-        "<leader><Down>" = { action = "'<cmd>:resize -5<CR>'"; };
+        "<leader><Right>" = {action = "'<cmd>:vertical resize +5<CR>'";};
+        "<leader><Left>" = {action = "'<cmd>:vertical resize -5<CR>'";};
+        "<leader><Up>" = {action = "'<cmd>:resize +5<CR>'";};
+        "<leader><Down>" = {action = "'<cmd>:resize -5<CR>'";};
       };
     };
 

@@ -1,15 +1,24 @@
-{ config, pkgs, inputs, system, user, hostname, agenix, nixneovim, ... }: {
-  
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  user,
+  hostname,
+  agenix,
+  nixneovim,
+  ...
+}: {
   imports = [
     (import ../modules/fonts.nix)
     (import ../modules/age.nix)
   ];
-  
+
   nixpkgs = {
     # Allow proprietary software
     config.allowUnfree = true;
   };
- 
+
   time.timeZone = "Europe/Berlin";
 
   networking.hostName = "${hostname}";
@@ -41,8 +50,9 @@
     ];
   };
 
-  environment.systemPackages = import ../common/system-packages.nix { inherit pkgs; } 
-  ++ [ agenix.packages.${system}.default ];
+  environment.systemPackages =
+    import ../common/system-packages.nix {inherit pkgs;}
+    ++ [agenix.packages.${system}.default];
 
   system.stateVersion = "23.11";
 
@@ -66,7 +76,11 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit user hostname; age=config.age; nixneovim = inputs.nixneovim; };
+  home-manager.extraSpecialArgs = {
+    inherit user hostname;
+    age = config.age;
+    nixneovim = inputs.nixneovim;
+  };
   home-manager.users.${user} = {
     imports = [
       ./home.nix

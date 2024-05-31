@@ -1,13 +1,7 @@
-# It defines all the packages, dependencies and other configuration needed to build the project.
-# The main entry point is the flake.nix file, which contains all the necessary information to build and run the project.
-
 {
-  # Flake description
   description = "Personal NixOS Configuration";
 
-  # Flake inputs
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -22,31 +16,45 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nix-darwin, agenix, nixneovim, nixos-wsl, ... }:
-    let
-      user = "edean";
-      hostname = "MBP-von-Dean";
-    in
-    {
-      darwinConfigurations = (
-        import ./darwin {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user hostname nix-darwin agenix;
-        }
-      );
-      darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-darwin,
+    agenix,
+    nixneovim,
+    nixos-wsl,
+    ...
+  }: let
+    user = "edean";
+    hostname = "MBP-von-Dean";
+    forAllSystems = function:
+      nixpkgs.lib.genAttrs ["aarch64-darwin" "x86_64-darwin" "aarch64-linux" "x86_64-linux"] (system:
+        function {
+          inherit system;
+          pkgs = nixpkgs.legacyPackages.${system};
+        });
+  in {
+    darwinConfigurations = (
+      import ./darwin {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs home-manager user hostname nix-darwin agenix;
+      }
+    );
+    darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
 
-      nixosConfigurations.wsl = (
-        import ./wsl/default.nix {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager agenix nixos-wsl;
-        }
-      );
-      nixosConfigurations.karotte = (
-        import ./karotte/default.nix {
-	  inherit (nixpkgs) lib;
-	  inherit inputs nixpkgs home-manager agenix;
-        }
-      );
-    };
+    nixosConfigurations.wsl = (
+      import ./wsl/default.nix {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs home-manager agenix nixos-wsl;
+      }
+    );
+    nixosConfigurations.karotte = (
+      import ./karotte/default.nix {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs home-manager agenix;
+      }
+    );
+    formatter = forAllSystems ({pkgs, ...}: pkgs.alejandra);
+  };
 }
