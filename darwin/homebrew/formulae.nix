@@ -1,4 +1,5 @@
 [
+  "colima"
   "rename"
   "helm"
 ]

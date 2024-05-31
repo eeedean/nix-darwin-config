@@ -9,7 +9,6 @@ with pkgs;
   bat
   bun
   cocoapods
-  colima
   curl
   diff-so-fancy
   docker-client
