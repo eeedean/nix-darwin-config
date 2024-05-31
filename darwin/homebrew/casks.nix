@@ -25,7 +25,6 @@
   "jdownloader"
   "jetbrains-toolbox"
   "keka"
-  "lm-studio"
   "libndi"
   "macfuse"
   "macpass"
