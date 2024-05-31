@@ -8,26 +8,20 @@
   nixneovim,
   ...
 }: {
-  # Home Manager
   home = {
-    # Home State Version
     stateVersion = "23.11";
 
-    # Username
     username = "${user}";
 
-    # Home Directory
     homeDirectory = "/Users/${user}";
 
     file."Library/Application\ Support/xbar/plugins/bahninfo.5s.sh".source = ./xbar/bahninfo.5s.sh;
     file."Library/Application\ Support/xbar/plugins/CalendarLite.1m.sh".source = ./xbar/CalendarLite.1m.sh;
-    file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
-    file.".config/zed/settings.json".source = ../modules/zed/settings.json;
+    file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
+    file.".config/zed/settings.json".source = ../../modules/zed/settings.json;
 
-    # Home Packages
-    packages = import ../common/home-packages.nix {inherit pkgs;};
+    packages = import ../../common/home-packages.nix {inherit pkgs;};
 
-    # Session Variables
     sessionVariables = {
       EDITOR = "vim";
       DOCKER_HOST = "unix://\${HOME}/.colima/default/docker.sock";
@@ -83,9 +77,7 @@
     };
   };
 
-  # Programs
   programs = {
-    # Home Manager
     home-manager.enable = true;
   };
   disabledModules = ["targets/darwin/linkapps.nix"]; # to use my aliasing instead

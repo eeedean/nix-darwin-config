@@ -9,23 +9,15 @@
   nixneovim,
   ...
 }: {
-  # Home Manager
   home = {
-    # Home State Version
     stateVersion = "23.11";
 
-    # Username
     username = "${user}";
 
-    # Home Directory
-    #homeDirectory = "/Users/${user}";
+    file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
 
-    file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
+    packages = import ../../common/home-packages.nix {inherit pkgs;};
 
-    # Home Packages
-    packages = import ../common/home-packages.nix {inherit pkgs;};
-
-    # Session Variables
     sessionVariables = {
       EDITOR = "nvim";
     };
@@ -47,7 +39,6 @@
     };
   };
 
-  # Programs
   programs = {
     # Home Manager
     home-manager.enable = true;

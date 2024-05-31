@@ -13,8 +13,8 @@
 
   # Imports
   imports = [
-    (import ../modules/fonts.nix)
-    (import ../modules/age.nix)
+    (import ../../modules/fonts.nix)
+    (import ../../modules/age.nix)
     (import ./homebrew)
   ];
 
@@ -37,7 +37,7 @@
   environment = {
     # Installed Nix Packages
     systemPackages =
-      import ../common/system-packages.nix {inherit pkgs;}
+      import ../../common/system-packages.nix {inherit pkgs;}
       ++ [agenix.packages.${system}.default];
   };
 
@@ -175,12 +175,12 @@
   home-manager.users.${user} = {
     imports = [
       ./home.nix
-      ../modules/home-manager/direnv.nix
-      ../modules/home-manager/git.nix
-      ../modules/home-manager/vscode.nix
-      ../modules/home-manager/nixneovim.nix
-      ../modules/home-manager/zsh/zsh.nix
-      ../modules/home-manager/wezterm/wezterm.nix
+      ../../modules/home-manager/direnv.nix
+      ../../modules/home-manager/git.nix
+      ../../modules/home-manager/vscode.nix
+      ../../modules/home-manager/nixneovim.nix
+      ../../modules/home-manager/zsh/zsh.nix
+      ../../modules/home-manager/wezterm/wezterm.nix
     ];
   };
 }

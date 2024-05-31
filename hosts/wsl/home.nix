@@ -20,7 +20,7 @@
     # Home Directory
     #homeDirectory = "/Users/${user}";
 
-    file.".config/zsh/p10k.zsh".source = ../modules/home-manager/zsh/.p10k.zsh;
+    file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
 
     # Home Packages
     packages = import ../common/home-packages.nix {inherit pkgs;};
