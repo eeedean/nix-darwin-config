@@ -29,6 +29,7 @@
     # Session Variables
     sessionVariables = {
       EDITOR = "nvim";
+      WAYLAND_DISPLAY = "true";
     };
 
     shellAliases = {
