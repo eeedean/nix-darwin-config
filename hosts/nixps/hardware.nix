@@ -15,6 +15,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
   boot.loader.systemd-boot.enable = true;
 
   fileSystems."/" = {
@@ -55,11 +56,26 @@
   };
 
   services.logind.lidSwitch = "ignore";
+  systemd.sleep.extraConfig = ''
+  '';
 
   networking = {
     networkmanager.enable = true;
     hostName = hostname;
   };
-  systemd.sleep.extraConfig = ''
-  '';
+
+  # doesn't work yet, but maybe it'll be patched at some point? 
+  services.fprintd = {
+    enable = true;
+    package = pkgs.fprintd-tod;
+    tod.enable = true;
+    tod.driver = pkgs.libfprint-2-tod1-goodix;
+  };
+
+  console.earlySetup = true;
+
+  services.fwupd.enable = lib.mkDefault true;
+
+  services.fstrim.enable = lib.mkDefault true;
+  services.thermald.enable = lib.mkDefault true;
 }
