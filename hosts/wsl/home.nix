@@ -9,21 +9,17 @@
   nixneovim,
   ...
 }: {
-  # Home Manager
+  imports = [
+    ../../modules/home-packages.nix
+  ];
   home = {
-    # Home State Version
     stateVersion = "23.11";
 
-    # Username
     username = "${user}";
-
-    # Home Directory
-    #homeDirectory = "/Users/${user}";
 
     file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
 
-    # Home Packages
-    packages = import ../common/home-packages.nix {inherit pkgs;};
+    packages = with pkgs; [];
 
     # Session Variables
     sessionVariables = {

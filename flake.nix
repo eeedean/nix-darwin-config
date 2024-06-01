@@ -54,6 +54,21 @@
         inherit inputs nixpkgs home-manager agenix;
       }
     );
+    nixosConfigurations."NiXPS" = let
+      system = "x86_64-linux";
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+          user = "dean";
+          hostname = "NiXPS";
+        };
+        modules = [
+          ./hosts/nixps
+          home-manager.nixosModules.home-manager
+        ];
+      };
     formatter = forAllSystems ({pkgs, ...}: pkgs.alejandra);
   };
 }

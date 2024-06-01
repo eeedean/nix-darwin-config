@@ -13,7 +13,7 @@
 
     # Font Packages
     # https://search.nixos.org/options?channel=unstable&show=fonts.fonts
-    fonts = with pkgs; [
+    packages = with pkgs; [
       dejavu_fonts
       fira-code-symbols
       hack-font

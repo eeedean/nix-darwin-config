@@ -13,9 +13,10 @@
 
   # Imports
   imports = [
-    (import ../../modules/fonts.nix)
-    (import ../../modules/age.nix)
-    (import ./homebrew)
+    ../../modules/fonts.nix
+    ../../modules/age.nix
+    ../../modules/system-packages.nix
+    ./homebrew
   ];
 
   # MacOS User & Shell
@@ -36,9 +37,7 @@
   # Environment Configuration
   environment = {
     # Installed Nix Packages
-    systemPackages =
-      import ../../common/system-packages.nix {inherit pkgs;}
-      ++ [agenix.packages.${system}.default];
+    systemPackages = [agenix.packages.${system}.default pkgs.cocoapods];
   };
 
   # System Services

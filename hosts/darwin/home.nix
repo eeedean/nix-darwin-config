@@ -8,6 +8,9 @@
   nixneovim,
   ...
 }: {
+  imports = [
+    ../../modules/home-packages.nix
+  ];
   home = {
     stateVersion = "23.11";
 
@@ -20,7 +23,7 @@
     file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
     file.".config/zed/settings.json".source = ../../modules/zed/settings.json;
 
-    packages = import ../../common/home-packages.nix {inherit pkgs;};
+    packages = with pkgs; [];
 
     sessionVariables = {
       EDITOR = "vim";

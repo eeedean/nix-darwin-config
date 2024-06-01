@@ -10,8 +10,9 @@
   ...
 }: {
   imports = [
-    (import ../../modules/fonts.nix)
-    (import ../../modules/age.nix)
+    ../../modules/fonts.nix
+    ../../modules/age.nix
+    ../../modules/system-packages.nix
   ];
 
   nixpkgs = {
@@ -49,9 +50,7 @@
     ];
   };
 
-  environment.systemPackages =
-    import ../../common/system-packages.nix {inherit pkgs;}
-    ++ [agenix.packages.${system}.default];
+  environment.systemPackages = [agenix.packages.${system}.default];
 
   system.stateVersion = "23.11";
 

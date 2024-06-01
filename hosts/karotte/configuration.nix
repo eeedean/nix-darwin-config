@@ -10,8 +10,9 @@
   ...
 }: {
   imports = [
-    (import ../../modules/fonts.nix)
-    (import ../../modules/age.nix)
+    ../../modules/fonts.nix
+    ../../modules/age.nix
+    ../../modules/system-packages.nix
   ];
 
   nixpkgs = {

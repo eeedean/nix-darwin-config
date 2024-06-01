@@ -9,6 +9,9 @@
   nixneovim,
   ...
 }: {
+  imports = [
+    ../../modules/home-packages.nix
+  ];
   home = {
     stateVersion = "23.11";
 
