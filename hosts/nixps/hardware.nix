@@ -55,7 +55,7 @@
     intelBusId = "PCI:0:2:0";
   };
 
-  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitch = "suspend";
   systemd.sleep.extraConfig = ''
   '';
 
