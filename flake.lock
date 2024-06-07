@@ -140,11 +140,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1717052710,
-        "narHash": "sha256-LRhOxzXmOza5SymhOgnEzA8EAQp+94kkeUYWKKpLJ/U=",
+        "lastModified": 1717525419,
+        "narHash": "sha256-5z2422pzWnPXHgq2ms8lcCfttM0dz+hg+x1pCcNkAws=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "29c69d9a466e41d46fd3a7a9d0591ef9c113c2ae",
+        "rev": "a7117efb3725e6197dd95424136f79147aa35e5b",
         "type": "github"
       },
       "original": {
@@ -170,6 +170,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "my-nixpkgs": {
+      "locked": {
+        "lastModified": 1717769004,
+        "narHash": "sha256-ExSFrL7FV1lR+MQwZKjoE5XwqNgOKSsn0K6OuDHbfGA=",
+        "owner": "eeedean",
+        "repo": "nixpkgs",
+        "rev": "3b3ec60b32b06130d65ccf325f0ad3f01438afc9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eeedean",
+        "ref": "my-packs",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -243,11 +259,11 @@
         "nmt": "nmt"
       },
       "locked": {
-        "lastModified": 1716380104,
-        "narHash": "sha256-tcVeEM4bW4YLJon5eU9DvyM4OOaMhy4jCDaE/kQPq8w=",
+        "lastModified": 1717708860,
+        "narHash": "sha256-3+MR+o9sOm4UApr60N78YV34hX6w1Fw5/uQPnVdJR7I=",
         "owner": "nixneovim",
         "repo": "nixneovim",
-        "rev": "9d829521b8e1065a40896e8a1989c3e2bad05f97",
+        "rev": "6c516111b4bbe346d1f603b9d0cf0a5bde22dadb",
         "type": "github"
       },
       "original": {
@@ -269,11 +285,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1716379933,
-        "narHash": "sha256-IlsMK48/UGM5yjb/l0vfN7CyyopGLJ/v+BCS6eGl01A=",
+        "lastModified": 1717621372,
+        "narHash": "sha256-u/U455J7V5EO6qkZq64T++pxUyns8n670lJV+5pOH7U=",
         "owner": "nixneovim",
         "repo": "nixneovimplugins",
-        "rev": "fbbf2e9c16a280b51f451af699025b72d259ac66",
+        "rev": "c911cb5d23260f89886a2359038f79fb19fde137",
         "type": "github"
       },
       "original": {
@@ -291,11 +307,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716640344,
-        "narHash": "sha256-AZKQs+KrL70le0RZH8XqZJMc2SahU4LpfEJ2Vd5SWzM=",
+        "lastModified": 1717712630,
+        "narHash": "sha256-VlwA4W7DtbyYFmXYB4Cimdx0sBjEjus/VV4QMXSc9VU=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "020cd466170204e448b24b246045599fce69ad91",
+        "rev": "d6003e57dc64ce9b310a16121fe30fab4b7d9d63",
         "type": "github"
       },
       "original": {
@@ -322,11 +338,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1716509168,
-        "narHash": "sha256-4zSIhSRRIoEBwjbPm3YiGtbd8HDWzFxJjw5DYSDy1n8=",
+        "lastModified": 1716948383,
+        "narHash": "sha256-SzDKxseEcHR5KzPXLwsemyTR/kaM9whxeiJohbL04rs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bfb7a882678e518398ce9a31a881538679f6f092",
+        "rev": "ad57eef4ef0659193044870c731987a6df5cf56b",
         "type": "github"
       },
       "original": {
@@ -369,15 +385,16 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1717075670,
-        "narHash": "sha256-Bbr6ozs8aU2E9hOpKa5FARLnF4GqrmqxgVDwq/IzxqU=",
+        "lastModified": 1717602782,
+        "narHash": "sha256-pL9jeus5QpX5R+9rsp3hhZ+uplVHscNJh8n8VpqscM0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c095274ad8088c4d01154f75332ac81c3f0392cf",
+        "rev": "e8057b67ebf307f01bdcc8fba94d94f75039d1f6",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -447,6 +464,7 @@
       "inputs": {
         "agenix": "agenix",
         "home-manager": "home-manager_2",
+        "my-nixpkgs": "my-nixpkgs",
         "nix-darwin": "nix-darwin",
         "nixneovim": "nixneovim",
         "nixos-wsl": "nixos-wsl",
