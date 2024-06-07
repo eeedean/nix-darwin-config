@@ -2,6 +2,7 @@
   lib,
   inputs,
   nixpkgs,
+  my-nixpkgs,
   home-manager,
   nix-darwin,
   user,
@@ -22,6 +23,9 @@ in {
         nixpkgs = {
           overlays = [
             inputs.nixneovim.overlays.default
+	    (final: prev: {
+	      my-packs = my-nixpkgs.legacyPackages.${system};
+	    })
           ];
         };
       }
