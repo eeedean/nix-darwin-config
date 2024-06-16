@@ -168,7 +168,7 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = {
-    inherit user hostname nixneovim;
+    inherit user hostname nixneovim system;
     age = config.age;
   };
   home-manager.users.${user} = {

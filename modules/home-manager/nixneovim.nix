@@ -2,11 +2,12 @@
   config,
   lib,
   pkgs,
+  system,
   nixneovim,
   ...
 }: {
   imports = [
-    nixneovim.nixosModules.default
+    nixneovim.nixosModules.${system}.default
   ];
 
   programs.nixneovim = {

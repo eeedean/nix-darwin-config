@@ -22,7 +22,6 @@ in {
       {
         nixpkgs = {
           overlays = [
-            inputs.nixneovim.overlays.default
 	    (final: prev: {
 	      my-packs = my-nixpkgs.legacyPackages.${system};
 	    })
