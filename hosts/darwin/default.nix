@@ -22,9 +22,12 @@ in {
       {
         nixpkgs = {
           overlays = [
-	    (final: prev: {
-	      my-packs = my-nixpkgs.legacyPackages.${system};
-	    })
+            (final: prev: {
+              my-packs = import my-nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            })
           ];
         };
       }
