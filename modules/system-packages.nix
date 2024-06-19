@@ -47,6 +47,7 @@
     watch
     wget
     xmlstarlet
+    zfind
     zsh-powerlevel10k
   ];
 }
