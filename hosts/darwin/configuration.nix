@@ -37,7 +37,7 @@
   # Environment Configuration
   environment = {
     # Installed Nix Packages
-    systemPackages = [agenix.packages.${system}.default pkgs.cocoapods pkgs.my-packs.zfind pkgs.my-packs.lmstudio];
+    systemPackages = [agenix.packages.${system}.default pkgs.cocoapods pkgs.my-packs.lmstudio];
   };
 
   # System Services
