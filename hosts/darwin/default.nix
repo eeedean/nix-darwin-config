@@ -28,6 +28,7 @@ in {
                 config.allowUnfree = true;
               };
             })
+            inputs.nixneovim.overlays.default
           ];
         };
       }

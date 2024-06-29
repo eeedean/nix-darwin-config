@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    nixneovim.nixosModules.${system}.default
+    nixneovim.nixosModules.default
   ];
 
   programs.nixneovim = {
