@@ -71,6 +71,21 @@
           home-manager.nixosModules.home-manager
         ];
       };
+    nixosConfigurations."NixHyperVM" = let
+      system = "x86_64-linux";
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+          user = "dean";
+          hostname = "NixHyperVM";
+        };
+        modules = [
+          ./hosts/nix-hyper-vm
+          home-manager.nixosModules.home-manager
+        ];
+      };
     formatter = forAllSystems ({pkgs, ...}: pkgs.alejandra);
   };
 }
