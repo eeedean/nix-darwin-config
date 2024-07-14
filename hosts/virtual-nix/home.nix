@@ -24,7 +24,14 @@
 
     file.".config/zsh/p10k.zsh".source = ../../modules/home-manager/zsh/.p10k.zsh;
 
-    packages = with pkgs; [discord enpass firefox jetbrains.idea-ultimate telegram-desktop usbutils];
+    packages = with pkgs; [
+      discord
+      enpass
+      firefox
+      jetbrains.idea-ultimate
+      telegram-desktop
+      usbutils
+    ];
 
     # Session Variables
     sessionVariables = {

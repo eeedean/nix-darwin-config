@@ -17,6 +17,7 @@
     }
     ./hardware.nix
     ./configuration.nix
+    ./virtualization.nix
     ../../modules/gnome.nix
     ../../modules/age.nix
     inputs.agenix.nixosModules.default
