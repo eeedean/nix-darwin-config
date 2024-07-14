@@ -37,6 +37,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       WAYLAND_DISPLAY = "true";
+      PATH = "$PATH:${pkgs.jetbrains.idea-ultimate}/idea-ultimate/bin";
     };
 
     shellAliases = {
