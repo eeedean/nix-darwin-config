@@ -18,7 +18,7 @@
     ./hardware.nix
     ./configuration.nix
     ./virtualization.nix
-    ../../modules/gnome.nix
+    ../../modules/plasma6.nix
     ../../modules/age.nix
     inputs.agenix.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
