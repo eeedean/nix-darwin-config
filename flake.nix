@@ -71,6 +71,21 @@
           home-manager.nixosModules.home-manager
         ];
       };
+    nixosConfigurations."VirtualNix" = let
+      system = "x86_64-linux";
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+          user = "dean";
+          hostname = "VirtualNix";
+        };
+        modules = [
+          ./hosts/virtual-nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
     nixosConfigurations."NixHyperVM" = let
       system = "x86_64-linux";
     in
