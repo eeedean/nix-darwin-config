@@ -53,7 +53,6 @@
   "steam"
   "telegram"
   "timeular"
-  "tunnelblick"
   "ultimaker-cura"
   "utm"
   "vlc"
