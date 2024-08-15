@@ -40,6 +40,7 @@
       "ls" = "eza";
       "vi" = "nvim";
       "vim" = "nvim";
+      "gen-mac-addr" = ''hexdump -n5 -e'/5 "32" 5/1 ":%02X"' /dev/random | cut -c 1-'';
     };
 
     activation = {
