@@ -95,6 +95,7 @@
       system-features = [
         "nixos-test"
         "apple-virt"
+	"big-parallel"
       ];
     };
     extraOptions = ''

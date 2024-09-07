@@ -8,6 +8,7 @@
   user,
   hostname,
   agenix,
+lix-module,
   ...
 }: let
   system = "aarch64-darwin";
@@ -36,6 +37,7 @@ in {
 
       agenix.nixosModules.default
       home-manager.darwinModules.home-manager
+      lix-module.nixosModules.default
     ];
   };
 }

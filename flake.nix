@@ -15,6 +15,10 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -26,6 +30,7 @@
     agenix,
     nixneovim,
     nixos-wsl,
+    lix-module,
     ...
   }: let
     user = "edean";
@@ -40,7 +45,7 @@
     darwinConfigurations = (
       import ./hosts/darwin {
         inherit (nixpkgs) lib;
-        inherit inputs nixpkgs my-nixpkgs home-manager user hostname nix-darwin agenix;
+        inherit inputs nixpkgs my-nixpkgs home-manager user hostname nix-darwin agenix lix-module;
       }
     );
 
