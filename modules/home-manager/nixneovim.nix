@@ -55,6 +55,8 @@
         "<leader>h" = {action = "'<cmd>:split<CR>'";};
         "<leader>v" = {action = "'<cmd>:vsplit<CR>'";};
 
+        "<leader>i" = {action = "'<cmd>:lua vim.diagnostic.open_float(nil, {focus=true, scope=\"cursor\"})<CR>'";};
+
         "<leader>ff" = {action = "require('telescope.builtin').find_files";};
         "<leader>fg" = {action = "require('telescope.builtin').live_grep";};
         "<leader>fb" = {action = "require('telescope.builtin').buffers";};
