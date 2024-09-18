@@ -2,7 +2,7 @@
   description = "Personal NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/658e7223191d2598641d50ee4e898126768fe847";
     my-nixpkgs.url = "github:eeedean/nixpkgs?ref=my-packs";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
