@@ -70,7 +70,14 @@
     };
 
     extraPlugins = [
-      pkgs.vimPlugins.ale
+      {
+	plugin = pkgs.vimPlugins.ale;
+	config = ''
+          let g:ale_linters_ignore = {
+            \  'haskell': ['ghc'],
+	    \}
+	'';
+      }
     ];
   };
 }
