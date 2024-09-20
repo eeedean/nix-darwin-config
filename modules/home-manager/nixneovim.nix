@@ -19,6 +19,10 @@
       wrap = false;
 
       shiftwidth = 2; # Tab width should be 2
+      smarttab = true;
+      expandtab = true;
+      tabstop = 8;
+      softtabstop = 4;
     };
 
     plugins = {
