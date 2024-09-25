@@ -3,7 +3,6 @@
     ansible
     audacity
     asciidoctor
-    awscli
     bash-completion
     bat
     bun
