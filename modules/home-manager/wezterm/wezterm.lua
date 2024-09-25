@@ -7,6 +7,8 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 
 -- Settings
 config.color_scheme = "Tokyo Night"
+-- config.front_end = "WebGpu";
+config.front_end = "OpenGL";
 -- config.color_scheme = "gotham"
 config.window_background_opacity = 0.9
 config.window_decorations = "RESIZE"
