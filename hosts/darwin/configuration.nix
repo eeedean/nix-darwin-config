@@ -105,7 +105,7 @@
     linux-builder = {
       enable = true;
       ephemeral = true;
-      maxJobs = 4;
+      maxJobs = 8;
       config = {
         nix.settings.sandbox = false;
         networking = {
@@ -116,7 +116,7 @@
             diskSize = 40 * 1024;
             memorySize = 8 * 1024;
           };
-          cores = 6;
+          cores = 8;
           msize = 128 * 1024;
         };
       };
