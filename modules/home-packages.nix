@@ -3,6 +3,7 @@
     coreutils
     eza
     nushell
+    openshift
     wget
     jq
   ];
