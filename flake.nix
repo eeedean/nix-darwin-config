@@ -61,6 +61,32 @@
         inherit inputs nixpkgs home-manager agenix;
       }
     );
+    homeConfigurations."karotte" = let 
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system}.extend inputs.nixneovim.overlays.default;
+    in 
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [ 
+          ./hosts/karotte/home.nix
+          ./modules/home-manager/direnv.nix
+          ./modules/home-manager/git.nix
+          ./modules/home-manager/nixneovim.nix
+          ./modules/home-manager/zsh/zsh.nix
+          ./modules/home-manager/wezterm/wezterm.nix
+        ];
+
+        # Optionally use extraSpecialArgs
+        # to pass  through arguments to home.nix
+        extraSpecialArgs = {
+          inherit system;
+          user = "dean";
+          nixneovim = inputs.nixneovim;
+        };
+      };
     nixosConfigurations."NiXPS" = let
       system = "x86_64-linux";
     in

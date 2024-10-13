@@ -24,7 +24,8 @@
       ];
     };
     initExtra = ''
-      source ~/.secure_profile
+      source ~/.secure_profile 2> /dev/null
+      source ~/.profile 2> /dev/null
       source ~/.config/zsh/p10k.zsh
       function saytofile(){ say -v $1 $2 -o .tmp.aiff && lame -m m .tmp.aiff $3.mp3 && rm .tmp.aiff; };
       function padBinary() {
