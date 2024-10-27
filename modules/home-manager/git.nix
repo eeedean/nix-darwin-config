@@ -53,6 +53,8 @@
     ignores = [
       ".DS_Store"
       ".idea"
+      ".direnv"
+      ".devenv"
     ];
   };
 }
