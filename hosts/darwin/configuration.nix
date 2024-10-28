@@ -37,7 +37,11 @@
   # Environment Configuration
   environment = {
     # Installed Nix Packages
-    systemPackages = [agenix.packages.${system}.default pkgs.cocoapods pkgs.lmstudio];
+    systemPackages = [agenix.packages.${system}.default pkgs.cocoapods pkgs.lmstudio ];
+    etc."pam.d/sudo_local".text = ''
+      auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so # reattach for tmux
+      auth       sufficient     pam_tid.so                                   # allow Touch ID for sudo
+    '';
   };
 
   # System Services
@@ -127,10 +131,6 @@
     # Allow proprietary software
     config.allowUnfree = true;
   };
-
-  # Security
-  # https://mynixos.com/nix-darwin/option/security.pam.enableSudoTouchIdAuth
-  security.pam.enableSudoTouchIdAuth = true;
 
   system = {
     configurationRevision = config.rev or config.dirtyRev or null;
