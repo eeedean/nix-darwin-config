@@ -42,6 +42,9 @@
       auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so # reattach for tmux
       auth       sufficient     pam_tid.so                                   # allow Touch ID for sudo
     '';
+    variables = {
+      NETRC = "/etc/nix/netrc";
+    };
   };
 
   # System Services
@@ -62,6 +65,7 @@
   # Nix Package Manager
   # https://mynixos.com/nix-darwin/option/nix
   nix = {
+    package = pkgs.nixVersions.nix_2_24;
     # Nix - GC (Garbage Collection)
     # https://mynixos.com/nix-darwin/option/nix.gc
     gc = {
@@ -94,6 +98,7 @@
       experimental-features = [
         "nix-command"
         "flakes"
+        "configurable-impure-env"
       ];
 
       system-features = [
@@ -104,6 +109,9 @@
     };
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
+      extra-sandbox-paths = /etc/nix
+      netrc-file = /etc/nix/netrc
+      impure-env = NETRC=/etc/nix/netrc
     '';
     # Enable building Linux binaries
     linux-builder = {
