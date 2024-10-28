@@ -2,8 +2,7 @@
   description = "Personal NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/658e7223191d2598641d50ee4e898126768fe847";
-    my-nixpkgs.url = "github:eeedean/nixpkgs?ref=my-packs";
+    nixpkgs.url = "github:nixos/nixpkgs/b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,22 +14,16 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
-    my-nixpkgs,
     home-manager,
     nix-darwin,
     agenix,
     nixneovim,
     nixos-wsl,
-    lix-module,
     ...
   }: let
     user = "edean";
@@ -45,7 +38,7 @@
     darwinConfigurations = (
       import ./hosts/darwin {
         inherit (nixpkgs) lib;
-        inherit inputs nixpkgs my-nixpkgs home-manager user hostname nix-darwin agenix lix-module;
+        inherit inputs nixpkgs home-manager user hostname nix-darwin agenix;
       }
     );
 

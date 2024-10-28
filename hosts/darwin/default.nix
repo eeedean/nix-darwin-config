@@ -2,13 +2,11 @@
   lib,
   inputs,
   nixpkgs,
-  my-nixpkgs,
   home-manager,
   nix-darwin,
   user,
   hostname,
   agenix,
-lix-module,
   ...
 }: let
   system = "aarch64-darwin";
@@ -23,12 +21,6 @@ in {
       {
         nixpkgs = {
           overlays = [
-            (final: prev: {
-              my-packs = import my-nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            })
             inputs.nixneovim.overlays.default
           ];
         };
@@ -37,7 +29,6 @@ in {
 
       agenix.nixosModules.default
       home-manager.darwinModules.home-manager
-      lix-module.nixosModules.default
     ];
   };
 }
