@@ -15,8 +15,9 @@
     ../../modules/home-manager/vscode.nix
     ../../modules/home-manager/nixneovim.nix
     ../../modules/home-manager/zsh/zsh.nix
-    ../../modules/home-manager/wezterm/wezterm.nix
+    ../../modules/home-manager/tmux.nix
   ];
+
   home = {
     stateVersion = "23.11";
 
