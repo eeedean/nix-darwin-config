@@ -48,5 +48,4 @@
   virtualisation.virtualbox.guest.enable = true;
 
   hardware.pulseaudio.enable = false;
-  sound.enable = false;
 }
