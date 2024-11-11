@@ -22,10 +22,10 @@
     gnome-background.enable = true;
     plymouth-logo.enable = true;
   };
-  hardware.opengl = {
+  hardware.graphics = {
     # this fixes the "glXChooseVisual failed" bug,
     # context: https://github.com/NixOS/nixpkgs/issues/47932
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 }
