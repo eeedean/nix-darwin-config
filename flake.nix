@@ -2,7 +2,7 @@
   description = "Personal NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221";
+    nixpkgs.url = "github:nixos/nixpkgs/5083ec887760adfe12af64830a66807423a859a7";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";

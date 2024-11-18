@@ -50,9 +50,6 @@
   # System Services
   # https://mynixos.com/nix-darwin/option/services
   services = {
-    # Activate System
-    # https://mynixos.com/nix-darwin/option/services.activate-system.enable
-    activate-system.enable = true;
 
     # Nix Deamon
     # https://mynixos.com/nix-darwin/option/services.nix-daemon.enable
