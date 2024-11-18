@@ -20,7 +20,6 @@
   "jetbrains-toolbox"
   "keka"
   "macfuse"
-  "mactex"
   "monitorcontrol"
   "notion"
   "obs"
