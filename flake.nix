@@ -2,7 +2,7 @@
   description = "Personal NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/5083ec887760adfe12af64830a66807423a859a7";
+    nixpkgs.url = "github:nixos/nixpkgs/24f0d4acd634792badd6470134c387a3b039dace";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -88,6 +88,21 @@
           user = "dean";
           nixneovim = inputs.nixneovim;
         };
+      };
+    nixosConfigurations."NixUTM" = let
+      system = "aarch64-linux";
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+          user = "dean";
+          hostname = "NixUTM";
+        };
+        modules = [
+          ./hosts/nix-utm
+          home-manager.nixosModules.home-manager
+        ];
       };
     nixosConfigurations."NiXPS" = let
       system = "x86_64-linux";
