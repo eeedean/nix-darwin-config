@@ -18,7 +18,7 @@
       iosevka
       liberation_ttf
       montserrat
-      nerdfonts
+      nerd-fonts.fira-code
       noto-fonts
       noto-fonts-emoji
       open-dyslexic

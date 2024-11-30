@@ -35,7 +35,7 @@
           echo "obase=2;$1" | bc;
         fi
       };
-      export NIX_REV="5083ec887760adfe12af64830a66807423a859a7";
+      export NIX_REV="f40efe1ce90f9cd692c8d56d9305fa6b9c07f211";
     '';
     plugins = [
       {
