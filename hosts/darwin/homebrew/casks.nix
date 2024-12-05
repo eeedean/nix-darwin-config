@@ -21,6 +21,7 @@
   "keka"
   "macfuse"
   "monitorcontrol"
+  "nheko"
   "notion"
   "obs"
   "parallels"
